@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
@@ -117,22 +117,23 @@ export default function LandingPage() {
 
       <section
         className="relative h-screen flex items-center justify-start px-10 text-white bg-cover bg-center"
-        style={{ backgroundImage: "url('/hero.jpg')" }}
+        style={{ backgroundImage: "url('/villa.jpg')" }}
+        
       >
-        <div className="max-w-2xl">
-          {/* Judul */}
+        <div className="max-w-2xl ml-10">
+
           <motion.h1
             className="text-6xl font-bold leading-tight"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            Ruang Nyaman <br />
-            <span className="text-yellow-300">dengan Jasa Interior</span>{" "}
+            Wujudkan Bangunan & Interior Berkualitas <br />
+            <span className="text-yellow-300">dengan Ahli Kontruksi dan Desain Profesional</span>{" "}
             Terbaik!
           </motion.h1>
 
-          {/* Tombol Konsultasi */}
+       
           <motion.button
             className="mt-6 px-6 py-3 bg-white text-black rounded-full font-semibold flex items-center gap-2 shadow-lg hover:bg-gray-200"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -142,7 +143,7 @@ export default function LandingPage() {
             Konsultasi Sekarang ➝
           </motion.button>
 
-          {/* Layanan */}
+         
           <motion.div
             className="mt-8 flex flex-wrap gap-3"
             initial={{ opacity: 0, y: 30 }}
@@ -168,7 +169,7 @@ export default function LandingPage() {
           </motion.div>
         </div>
 
-        {/* Box Informasi Tim Profesional */}
+        
         <motion.div
           className="absolute bottom-10 right-10 bg-yellow-900 text-white p-6 rounded-lg shadow-xl max-w-sm"
           initial={{ opacity: 0, x: 50 }}
@@ -179,9 +180,9 @@ export default function LandingPage() {
             Dilakukan oleh Tim Profesional!
           </h3>
           <p className="text-sm mt-2">
-            Kami menawarkan layanan desain interior yang ditangani oleh tim
-            profesional berpengalaman, siap mewujudkan ruang impian Anda dengan
-            estetika, kenyamanan, dan fungsionalitas.
+          Sejak 2009, kami ahli dalam konstruksi dan desain interior, 
+          menghadirkan bangunan kokoh, estetis, dan fungsional. 
+          Dengan tim profesional, kami berkomitmen memberikan solusi terbaik untuk hunian hingga bangunan komersial."
           </p>
           <div className="mt-4 flex items-center gap-3">
             <div className="flex -space-x-2">
@@ -201,14 +202,14 @@ export default function LandingPage() {
                 className="w-8 h-8 rounded-full border-2 border-white"
               />
             </div>
-            <span className="text-sm font-medium">1000+ Pelanggan Puas</span>
+            <span className="text-sm font-medium">100+ Pelanggan Puas</span>
           </div>
         </motion.div>
       </section>
 
-      <section className="px-10 py-16 flex items-center justify-between gap-12">
-        {/* Bagian Kiri (Teks dan List) */}
-        <div className="max-w-lg">
+      <section className="px-10 py-20 flex items-center justify-between gap-12">
+       
+        <div className="max-w-lg ml-10">
           <motion.h2
             className="text-4xl font-bold leading-tight"
             initial={{ opacity: 0, y: 50 }}
@@ -233,7 +234,7 @@ export default function LandingPage() {
             kami hadir untuk mengubahnya menjadi pengalaman yang tak terlupakan.
           </motion.p>
 
-          {/* List Keunggulan */}
+        
           <motion.ul
             className="mt-6 space-y-3"
             initial={{ opacity: 0, y: 30 }}
@@ -253,7 +254,7 @@ export default function LandingPage() {
             ))}
           </motion.ul>
 
-          {/* Tombol Konsultasi */}
+        
           <motion.div
             className="mt-8 bg-yellow-900 text-white p-6 rounded-lg max-w-sm"
             initial={{ opacity: 0, x: -50 }}
@@ -270,22 +271,22 @@ export default function LandingPage() {
           </motion.div>
         </div>
 
-        {/* Bagian Kanan (Gambar dan Elemen Pengalaman) */}
+     
         <motion.div
-          className="relative"
+          className="relative right-10"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1.2, duration: 1 }}
         >
           <div className="relative w-[500px] h-[400px] overflow-hidden rounded-[50%] shadow-lg">
             <img
-              src="/interior.jpg"
+              src="/interior.jpeg"
               alt="Interior"
               className="w-full h-full object-cover"
             />
           </div>
 
-          {/* Elemen Tahun Pengalaman */}
+          
           <motion.div
             className="absolute top-6 left-6 bg-black text-white px-4 py-2 rounded-full shadow-lg text-center"
             initial={{ scale: 0.8, opacity: 0 }}
@@ -325,7 +326,7 @@ export default function LandingPage() {
           ))}
         </div>
 
-        {/* POPUP MODAL */}
+   
         <AnimatePresence>
           {selectedService && (
             <motion.div
@@ -388,7 +389,7 @@ export default function LandingPage() {
         </AnimatePresence>
       </section>
 
-      {/* Portfolio Section */}
+     
       <section className="py-20 px-10 text-center bg-gray-100">
         <h2 className="text-3xl font-bold mb-10">Our Portfolio</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -406,15 +407,15 @@ export default function LandingPage() {
       </section>
 
       <section className="relative h-[500px] flex items-center text-white">
-        {/* Background Image */}
+   
         <div
           className="absolute inset-0 bg-cover bg-center brightness-50"
-          style={{ backgroundImage: "url('/your-image.jpg')" }}
+          style={{ backgroundImage: "url('/dapur.jpeg')" }}
         />
 
-        {/* Content */}
+       
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          {/* Animasi Fade-in */}
+          
           <motion.h2
             className="text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 30 }}
@@ -425,7 +426,7 @@ export default function LandingPage() {
             <span className="text-gray-300">Direkomendasikan</span> Semua Orang
           </motion.h2>
 
-          {/* Deskripsi */}
+      
           <motion.p
             className="text-lg mb-6"
             initial={{ opacity: 0, y: 20 }}
@@ -439,7 +440,7 @@ export default function LandingPage() {
             ekspektasi.
           </motion.p>
 
-          {/* Tombol */}
+         
           <motion.a
             href="#"
             className="inline-block px-6 py-3 bg-white text-gray-900 font-semibold rounded-full shadow-lg hover:bg-gray-200 transition"
@@ -451,20 +452,20 @@ export default function LandingPage() {
       </section>
 
       <section className="flex flex-col md:flex-row items-center gap-10 px-6 md:px-16 py-16 bg-white">
-        {/* Bagian Gambar */}
+      
         <div className="relative w-full md:w-1/2">
-          {/* Gambar utama */}
+      
           <motion.img
-            src="/image1.jpg"
+            src="/villa2.jpeg"
             alt="Interior Design"
             className="w-full rounded-tl-[50px] rounded-br-[50px] shadow-lg"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           />
-          {/* Gambar bulat kecil */}
+          
           <motion.img
-            src="/image2.jpg"
+            src="/interior2.jpeg"
             alt="Luxury Interior"
             className="absolute bottom-[-50px] right-[-50px] w-1/2 rounded-full border-4 border-white shadow-md"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -473,10 +474,10 @@ export default function LandingPage() {
           />
         </div>
 
-        {/* Bagian Teks */}
+       
         <div className="w-full md:w-1/2 text-gray-900">
           <motion.h2
-            className="text-4xl font-bold mb-4"
+            className="text-4xl font-bold ml-10  mb-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -486,7 +487,7 @@ export default function LandingPage() {
           </motion.h2>
 
           <motion.p
-            className="text-lg text-gray-600 mb-6"
+            className="text-lg text-gray-600 ml-10 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
@@ -497,14 +498,14 @@ export default function LandingPage() {
             fungsional, menciptakan ruang yang nyaman.
           </motion.p>
 
-          {/* List Keunggulan */}
+          
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center ml-10 gap-4">
               <FaRegFileAlt className="text-3xl text-gray-800" />
               <div>
                 <h3 className="font-bold text-lg">
@@ -516,7 +517,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center ml-10 gap-4">
               <FaDollarSign className="text-3xl text-gray-800" />
               <div>
                 <h3 className="font-bold text-lg">
@@ -528,7 +529,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center ml-10 gap-4">
               <FaHeadset className="text-3xl text-gray-800" />
               <div>
                 <h3 className="font-bold text-lg">24/7 Customer Support</h3>
@@ -541,8 +542,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="px-6 md:px-16 py-16 bg-white">
-        {/* Judul */}
+      <section className="px-6 md:px-16 py-8 bg-white">
+       
         <div className="text-center mb-10">
           <p className="text-sm text-gray-600">
             Masih Memiliki Pertanyaan? Kami Disini Untuk Membantumu!{" "}
@@ -550,8 +551,8 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-10">
-          {/* Sidebar Kategori */}
+        <div className="flex flex-col md:flex-row mt-20 gap-10">
+         
           <div className="w-full md:w-1/3 text-center md:text-left">
             <h3 className="text-xl font-bold text-black">Konsultasi Desain</h3>
             <p className="text-gray-500 mt-2">Proses Desain & Pelaksanaan</p>
@@ -560,7 +561,7 @@ export default function LandingPage() {
             <p className="text-gray-500 mt-2">Layanan Customer Service</p>
           </div>
 
-          {/* FAQ List */}
+         
           <div className="w-full md:w-2/3">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
               Pertanyaan{" "}
@@ -568,7 +569,7 @@ export default function LandingPage() {
               Ditanyakan
             </h2>
 
-            {/* FAQ Items */}
+        
             <div className="space-y-6">
               {faqs.map((faq, index) => (
                 <div key={index} className="border-b pb-4">
@@ -586,7 +587,7 @@ export default function LandingPage() {
                     )}
                   </button>
 
-                  {/* Animasi Jawaban */}
+               
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{
@@ -607,12 +608,12 @@ export default function LandingPage() {
 
       <section
         className="relative bg-cover bg-center text-white py-20"
-        style={{ backgroundImage: "url('/background.jpg')" }}
+        style={{ backgroundImage: "url(/villa.jpeg')" }}
       >
-        {/* Overlay Gradient */}
+       
         <div className="absolute inset-0 bg-gradient-to-r from-[#6D4C2F] via-[#6D4C2F]/90 to-transparent"></div>
 
-        {/* Content */}
+        
         <div className="relative max-w-6xl mx-auto px-6 md:px-16">
           <motion.h2
             className="text-5xl font-bold mb-6"
@@ -637,7 +638,7 @@ export default function LandingPage() {
             impian Anda.
           </motion.p>
 
-          {/* Steps */}
+         
           <div className="grid md:grid-cols-2 gap-8">
             {steps.map((step, index) => (
               <motion.div
@@ -663,7 +664,7 @@ export default function LandingPage() {
 
       <footer className="bg-[#3D2B1F] text-white py-10 px-6 md:px-16">
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-          {/* Logo & Deskripsi */}
+          
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 30 }}
@@ -694,7 +695,6 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
-          {/* Company Links */}
           <motion.div
             className="space-y-3"
             initial={{ opacity: 0, y: 30 }}
@@ -722,7 +722,7 @@ export default function LandingPage() {
             </ul>
           </motion.div>
 
-          {/* Informasi Kontak */}
+         
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 30 }}
@@ -745,7 +745,7 @@ export default function LandingPage() {
           </motion.div>
         </div>
 
-        {/* Copyright */}
+     
         <div className="mt-10 border-t border-white/20 pt-6 text-center text-white/80">
           <p>Copyright © 2025 Sumber Usaha. All Rights Reserved.</p>
           <div className="flex justify-center gap-6 mt-2">
@@ -758,6 +758,8 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+ 
+      
     </div>
   );
 }
