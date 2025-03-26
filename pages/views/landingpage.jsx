@@ -105,23 +105,30 @@ export default function LandingPage() {
 
   return (
     <div className="bg-white font-sans">
-      <nav className="fixed top-0 w-full bg-white shadow-md p-4 z-50 flex justify-between px-10">
-        <h1 className="text-xl font-bold">Brand</h1>
-        <ul className="flex space-x-6">
-          <li>Home</li>
-          <li>Services</li>
-          <li>Portfolio</li>
-          <li>Contact</li>
+      <nav className="fixed top-0 w-full bg-white shadow-md p-4 z-50 flex justify-between px-10 items-center">
+        <a href="/">
+          <img src="/logo1.png" alt="Brand Logo" className="w-24" />
+        </a>
+
+        <ul className="flex space-x-6 text-black">
+          {["Home", "Services", "Portfolio", "Contact"].map((item, index) => (
+            <li key={index}>
+              <a
+                href={`#${item.toLowerCase()}`}
+                className="hover:text-yellow-500 transition"
+              >
+                {item}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
 
       <section
         className="relative h-screen flex items-center justify-start px-10 text-white bg-cover bg-center"
         style={{ backgroundImage: "url('/villa.jpg')" }}
-        
       >
         <div className="max-w-2xl ml-10">
-
           <motion.h1
             className="text-6xl font-bold leading-tight"
             initial={{ opacity: 0, y: 50 }}
@@ -129,11 +136,12 @@ export default function LandingPage() {
             transition={{ duration: 1 }}
           >
             Wujudkan Bangunan & Interior Berkualitas <br />
-            <span className="text-yellow-300">dengan Ahli Kontruksi dan Desain Profesional</span>{" "}
+            <span className="text-yellow-300">
+              dengan Ahli Kontruksi dan Desain Profesional
+            </span>{" "}
             Terbaik!
           </motion.h1>
 
-       
           <motion.button
             className="mt-6 px-6 py-3 bg-white text-black rounded-full font-semibold flex items-center gap-2 shadow-lg hover:bg-gray-200"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -143,25 +151,22 @@ export default function LandingPage() {
             Konsultasi Sekarang ➝
           </motion.button>
 
-         
           <motion.div
-            className="mt-8 flex flex-wrap gap-3"
+            className="mt-8 flex flex-wrap gap-4 max-w-lg"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
           >
             {[
+              "Kontraktor",
+              "Desain Arsitektur",
               "Desain Interior",
-              "Dekorasi Interior",
-              "Furniture Custom",
-              "Kitchenset",
+              "Kontraktor Interior",
               "Renovasi",
-              "ACP",
-              "Exterior",
             ].map((service, index) => (
               <span
                 key={index}
-                className="px-4 py-2 bg-white text-black rounded-full text-sm font-medium shadow-md"
+                className="px-4 py-2 bg-white text-black rounded-full text-sm font-medium shadow-md whitespace-nowrap"
               >
                 {service}
               </span>
@@ -169,9 +174,8 @@ export default function LandingPage() {
           </motion.div>
         </div>
 
-        
         <motion.div
-          className="absolute bottom-10 right-10 bg-yellow-900 text-white p-6 rounded-lg shadow-xl max-w-sm"
+          className="absolute bottom-10 right-10 bg-yellow-700 text-white p-6 rounded-lg shadow-xl max-w-sm"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
@@ -180,9 +184,10 @@ export default function LandingPage() {
             Dilakukan oleh Tim Profesional!
           </h3>
           <p className="text-sm mt-2">
-          Sejak 2009, kami ahli dalam konstruksi dan desain interior, 
-          menghadirkan bangunan kokoh, estetis, dan fungsional. 
-          Dengan tim profesional, kami berkomitmen memberikan solusi terbaik untuk hunian hingga bangunan komersial."
+            Sejak 2009, kami ahli dalam konstruksi dan desain interior,
+            menghadirkan bangunan kokoh, estetis, dan fungsional. Dengan tim
+            profesional, kami berkomitmen memberikan solusi terbaik untuk hunian
+            hingga bangunan komersial."
           </p>
           <div className="mt-4 flex items-center gap-3">
             <div className="flex -space-x-2">
@@ -208,7 +213,6 @@ export default function LandingPage() {
       </section>
 
       <section className="px-10 py-20 flex items-center justify-between gap-12">
-       
         <div className="max-w-lg ml-10">
           <motion.h2
             className="text-4xl font-bold leading-tight"
@@ -217,11 +221,19 @@ export default function LandingPage() {
             transition={{ duration: 1 }}
           >
             <span className="text-black">Kenapa </span>
-            <span className="font-extrabold">Memilih</span> kami <br />
-            <span className="font-extrabold">
-              Untuk Mewujudkan
-            </span> Ruangan <span className="font-extrabold">Impianmu</span>{" "}
-            Penuh <span className="text-gray-500">Makna?</span>
+            <span className="font- extrabold text-yellow-300">
+              Memilih kami
+            </span>
+            <br />
+            <span className="font-extrabold text-yellow-300">
+              Untuk Mewujudkan Ruangan
+            </span>{" "}
+            <br />
+            <span className="font-extrabold text-yellow-300">
+              Impianmu Penuh
+              <br />
+            </span>
+            <span className="text-gray-500">Makna?</span>
           </motion.h2>
 
           <motion.p
@@ -234,9 +246,8 @@ export default function LandingPage() {
             kami hadir untuk mengubahnya menjadi pengalaman yang tak terlupakan.
           </motion.p>
 
-        
           <motion.ul
-            className="mt-6 space-y-3"
+            className="mt-6 space-y-3 text-black"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
@@ -254,14 +265,13 @@ export default function LandingPage() {
             ))}
           </motion.ul>
 
-        
           <motion.div
-            className="mt-8 bg-yellow-900 text-white p-6 rounded-lg max-w-sm"
+            className="mt-5 bg-yellow-7 00 text-white p-6 rounded-lg max-w-sm"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 1 }}
           >
-            <h3 className="text-xl font-bold">
+            <h3 className="text-xl font-bold text-black">
               Siap untuk{" "}
               <span className="text-yellow-300">Hasil yang Memuaskan?</span>
             </h3>
@@ -271,7 +281,6 @@ export default function LandingPage() {
           </motion.div>
         </div>
 
-     
         <motion.div
           className="relative right-10"
           initial={{ opacity: 0, x: 50 }}
@@ -286,7 +295,6 @@ export default function LandingPage() {
             />
           </div>
 
-          
           <motion.div
             className="absolute top-6 left-6 bg-black text-white px-4 py-2 rounded-full shadow-lg text-center"
             initial={{ scale: 0.8, opacity: 0 }}
@@ -326,7 +334,6 @@ export default function LandingPage() {
           ))}
         </div>
 
-   
         <AnimatePresence>
           {selectedService && (
             <motion.div
@@ -389,7 +396,6 @@ export default function LandingPage() {
         </AnimatePresence>
       </section>
 
-     
       <section className="py-20 px-10 text-center bg-gray-100">
         <h2 className="text-3xl font-bold mb-10">Our Portfolio</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -407,15 +413,12 @@ export default function LandingPage() {
       </section>
 
       <section className="relative h-[500px] flex items-center text-white">
-   
         <div
           className="absolute inset-0 bg-cover bg-center brightness-50"
           style={{ backgroundImage: "url('/dapur.jpeg')" }}
         />
 
-       
         <div className="relative z-10 max-w-4xl mx-auto px-6">
-          
           <motion.h2
             className="text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 30 }}
@@ -426,7 +429,6 @@ export default function LandingPage() {
             <span className="text-gray-300">Direkomendasikan</span> Semua Orang
           </motion.h2>
 
-      
           <motion.p
             className="text-lg mb-6"
             initial={{ opacity: 0, y: 20 }}
@@ -440,7 +442,6 @@ export default function LandingPage() {
             ekspektasi.
           </motion.p>
 
-         
           <motion.a
             href="#"
             className="inline-block px-6 py-3 bg-white text-gray-900 font-semibold rounded-full shadow-lg hover:bg-gray-200 transition"
@@ -452,9 +453,7 @@ export default function LandingPage() {
       </section>
 
       <section className="flex flex-col md:flex-row items-center gap-10 px-6 md:px-16 py-16 bg-white">
-      
         <div className="relative w-full md:w-1/2">
-      
           <motion.img
             src="/villa2.jpeg"
             alt="Interior Design"
@@ -463,7 +462,7 @@ export default function LandingPage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           />
-          
+
           <motion.img
             src="/interior2.jpeg"
             alt="Luxury Interior"
@@ -474,7 +473,6 @@ export default function LandingPage() {
           />
         </div>
 
-       
         <div className="w-full md:w-1/2 text-gray-900">
           <motion.h2
             className="text-4xl font-bold ml-10  mb-4"
@@ -498,7 +496,6 @@ export default function LandingPage() {
             fungsional, menciptakan ruang yang nyaman.
           </motion.p>
 
-          
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
@@ -543,25 +540,33 @@ export default function LandingPage() {
       </section>
 
       <section className="px-6 md:px-16 py-8 bg-white">
-       
-        <div className="text-center mb-10">
-          <p className="text-sm text-gray-600">
-            Masih Memiliki Pertanyaan? Kami Disini Untuk Membantumu!{" "}
-            <span className="font-bold text-black">Hubungi Kami</span>
-          </p>
-        </div>
-
         <div className="flex flex-col md:flex-row mt-20 gap-10">
-         
           <div className="w-full md:w-1/3 text-center md:text-left">
-            <h3 className="text-xl font-bold text-black">Konsultasi Desain</h3>
-            <p className="text-gray-500 mt-2">Proses Desain & Pelaksanaan</p>
-            <p className="text-gray-500 mt-2">Harga & Pembayaran</p>
-            <p className="text-gray-500 mt-2">Layanan Purna Jual</p>
-            <p className="text-gray-500 mt-2">Layanan Customer Service</p>
+            <h3 className="text-lg text-gray-600">
+              Masih Memiliki Pertanyaan? Kami Disini Untuk Membantumu!{" "}
+              <span className="font-bold text-black cursor-pointer hover:underline">
+                Hubungi Kami
+              </span>
+            </h3>
+
+            <div className="mt-2 flex flex-col gap-2">
+              {[
+                "Konsultasi Desain",
+                "Proses Desain & Pelaksanaan",
+                "Harga & Pembayaran",
+                "Layanan Purna Jual",
+                "Layanan Customer Service",
+              ].map((item, index) => (
+                <p
+                  key={index}
+                  className="text-gray-500 cursor-pointer hover:text-black hover:underline"
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
           </div>
 
-         
           <div className="w-full md:w-2/3">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
               Pertanyaan{" "}
@@ -569,7 +574,6 @@ export default function LandingPage() {
               Ditanyakan
             </h2>
 
-        
             <div className="space-y-6">
               {faqs.map((faq, index) => (
                 <div key={index} className="border-b pb-4">
@@ -587,7 +591,6 @@ export default function LandingPage() {
                     )}
                   </button>
 
-               
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{
@@ -610,10 +613,8 @@ export default function LandingPage() {
         className="relative bg-cover bg-center text-white py-20"
         style={{ backgroundImage: "url(/villa.jpeg')" }}
       >
-       
         <div className="absolute inset-0 bg-gradient-to-r from-[#6D4C2F] via-[#6D4C2F]/90 to-transparent"></div>
 
-        
         <div className="relative max-w-6xl mx-auto px-6 md:px-16">
           <motion.h2
             className="text-5xl font-bold mb-6"
@@ -638,7 +639,6 @@ export default function LandingPage() {
             impian Anda.
           </motion.p>
 
-         
           <div className="grid md:grid-cols-2 gap-8">
             {steps.map((step, index) => (
               <motion.div
@@ -664,16 +664,15 @@ export default function LandingPage() {
 
       <footer className="bg-[#3D2B1F] text-white py-10 px-6 md:px-16">
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-          
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <img src="/logo.png" alt="Logo" className="w-16" />
+            <img src="/logo1.png" alt="Logo" className="w-48" />
             <p className="text-white/80">
-              Kami telah berdiri sejak 2015, selalu mengedepankan keseimbangan
+              Kami telah berdiri sejak 2009, selalu mengedepankan keseimbangan
               dalam perencanaan, pelaksanaan proyek, dan program yang terarah
               serta terukur untuk menghasilkan pekerjaan yang maksimal.
             </p>
@@ -707,8 +706,8 @@ export default function LandingPage() {
                 "Beranda",
                 "Tentang Kami",
                 "Rekomendasi",
+                "Portofolio",
                 "Ulasan",
-                "FAQ",
                 "Proses Pelaksanaan",
               ].map((item, index) => (
                 <motion.li
@@ -722,7 +721,6 @@ export default function LandingPage() {
             </ul>
           </motion.div>
 
-         
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 30 }}
@@ -740,14 +738,13 @@ export default function LandingPage() {
             </div>
             <div className="flex items-start gap-3">
               <FaMapMarkerAlt className="mt-1" />
-              <span>Central Park Wiguna Blok E No. 1, Surabaya</span>
+              <span>Jl. Gumuh Ayu VII, Abianbase, Badung, Bali</span>
             </div>
           </motion.div>
         </div>
 
-     
         <div className="mt-10 border-t border-white/20 pt-6 text-center text-white/80">
-          <p>Copyright © 2025 Sumber Usaha. All Rights Reserved.</p>
+          <p>Copyright © 2025 Ganesh House. All Rights Reserved.</p>
           <div className="flex justify-center gap-6 mt-2">
             <a href="#" className="hover:text-[#FFD700] transition">
               Privacy Policy
@@ -758,8 +755,6 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
- 
-      
     </div>
   );
 }
