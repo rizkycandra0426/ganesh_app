@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
 import { motion, AnimatePresence } from "framer-motion";
+import {Swiper, SwiperSlide} from "swiper/react";
+import { CheckCircle, Users, Ruler, ClipboardList, Clock } from "lucide-react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { CheckCircle } from "lucide-react";
+
 import {
   FaRegFileAlt,
   FaDollarSign,
@@ -19,8 +21,6 @@ import Service from "@/components/service";
 import Portofolio from "@/components/portofolio";
 import Ulasan from "@/components/ulasan";
 import Footer from "@/components/footer";
-
-
 
 const steps = [
   {
@@ -48,195 +48,223 @@ const steps = [
   },
 ];
 
+const slides = [
+  {
+    title: "Best Idea & Solution For Your Dream Home",
+    services: [
+      "Desain Arsitektur",
+      "Desain Interior",
+      "Kontraktor",
+      "Renovasi",
+    ],
+    background: "/villa.jpg",
+  },
+  {
+    title: "Wujudkan Bangunan & Interior Berkualitas",
+    subtitle: "dengan Ahli Konstruksi dan Desain Profesional Terbaik!",
+    freeOffers: [
+      "✅ Survey Lokasi",
+      "✅ Konsultasi Desain Arsitektur & Struktur",
+      "✅ Desain 2D & 3D*",
+    ],
+    background: "/construction.jpg",
+  },
+];
+
+const benefits = [
+  {
+    title: "Tim Profesional & Berpengalaman",
+    description:
+      "Dikerjakan oleh tenaga profesional dengan pengalaman di bidangnya.",
+    icon: <Users className="w-10 h-10 text-white" />,
+  },
+  {
+    title: "Desain yang Disesuaikan",
+    description:
+      "Kami menawarkan desain eksklusif sesuai kebutuhan dan gaya Anda.",
+    icon: <Ruler className="w-10 h-10 text-white" />,
+  },
+  {
+    title: "Harga Kompetitif",
+    description:
+      "Kami akan kalkulasikan pada Rencana Anggaran Biaya dengan menyesuaikan budget anda",
+  },
+  {
+    title: "Proses Transparan & Kolaboratif",
+    description:
+      "Setiap tahapan proyek dipantau dan dikomunikasikan secara terbuka.",
+    icon: <ClipboardList className="w-10 h-10 text-white" />,
+  },
+  {
+    title: "Layanan Tepat Waktu & Terjangkau",
+    description:
+      "Kami berkomitmen memberikan layanan berkualitas dengan harga bersaing.",
+    icon: <Clock className="w-10 h-10 text-white" />,
+  },
+  {
+    title: "Bergaransi",
+    description:
+      "Masa pemeliharaan bangunan dan interior kami berikan selama 2 bulan.",
+  },
+];
 export default function LandingPage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="bg-white font-sans">
     <Navbar/>
 
-      <section id='home'
-        className="relative h-screen flex items-center justify-start px-10 text-white bg-cover bg-center"
-        style={{ backgroundImage: "url('/villa.jpg')" }}
-      >
-        <div className="max-w-2xl ml-10">
-          <motion.h1
-            className="text-6xl font-bold leading-tight"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            Wujudkan Bangunan & Interior Berkualitas <br />
-            <span className="text-yellow-300">
-              dengan Ahli Kontruksi dan Desain Profesional
-            </span>{" "}
-            Terbaik!
-          </motion.h1>
-
-          <motion.button
-            className="mt-6 px-6 py-3 bg-white text-black rounded-full font-semibold flex items-center gap-2 shadow-lg hover:bg-gray-200"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-          >
-            Konsultasi Sekarang ➝
-          </motion.button>
-
+    <section className="relative h-screen flex items-center justify-center text-white bg-cover bg-center">
+        <AnimatePresence mode="wait">
           <motion.div
-            className="mt-8 flex flex-wrap gap-4 max-w-lg"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
-          >
-            {[
-              "Kontraktor",
-              "Desain Arsitektur",
-              "Desain Interior",
-              "Kontraktor Interior",
-              "Renovasi",
-            ].map((service, index) => (
-              <span
-                key={index}
-                className="px-4 py-2 bg-white text-black rounded-full text-sm font-medium shadow-md whitespace-nowrap"
-              >
-                {service}
-              </span>
-            ))}
-          </motion.div>
-        </div>
-
-        <motion.div
-          className="absolute bottom-10 right-10 bg-yellow-700 text-white p-6 rounded-lg shadow-xl max-w-sm"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-        >
-          <h3 className="text-lg font-semibold">
-            Dilakukan oleh Tim Profesional!
-          </h3>
-          <p className="text-sm mt-2">
-            Sejak 2009, kami ahli dalam konstruksi dan desain interior,
-            menghadirkan bangunan kokoh, estetis, dan fungsional. Dengan tim
-            profesional, kami berkomitmen memberikan solusi terbaik untuk hunian
-            hingga bangunan komersial."
-          </p>
-          <div className="mt-4 flex items-center gap-3">
-            <div className="flex -space-x-2">
-              <img
-                src="/profile1.jpg"
-                alt="User 1"
-                className="w-8 h-8 rounded-full border-2 border-white"
-              />
-              <img
-                src="/profile2.jpg"
-                alt="User 2"
-                className="w-8 h-8 rounded-full border-2 border-white"
-              />
-              <img
-                src="/profile3.jpg"
-                alt="User 3"
-                className="w-8 h-8 rounded-full border-2 border-white"
-              />
-            </div>
-            <span className="text-sm font-medium">100+ Pelanggan Puas</span>
-          </div>
-        </motion.div>
-      </section>
-
-      <section className="px-10 py-20 flex items-center justify-between gap-12">
-        <div className="max-w-lg ml-10">
-          <motion.h2
-            className="text-4xl font-bold leading-tight"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <span className="text-black">Kenapa </span>
-            <span className="font- extrabold text-yellow-300">
-              Memilih kami
-            </span>
-            <br />
-            <span className="font-extrabold text-yellow-300">
-              Untuk Mewujudkan Ruangan
-            </span>{" "}
-            <br />
-            <span className="font-extrabold text-yellow-300">
-              Impianmu Penuh
-              <br />
-            </span>
-            <span className="text-gray-500">Makna?</span>
-          </motion.h2>
-
-          <motion.p
-            className="mt-4 text-gray-600"
+            key={currentSlide}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${slides[currentSlide].background})`,
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
-          >
-            Pilih kami untuk menjadikan ruang Anda lebih dari sekadar tempat,
-            kami hadir untuk mengubahnya menjadi pengalaman yang tak terlupakan.
-          </motion.p>
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          />
+        </AnimatePresence>
 
-          <motion.ul
-            className="mt-6 space-y-3 text-black"
-            initial={{ opacity: 0, y: 30 }}
+        {/* Overlay Transparan */}
+        <div className="absolute inset-0 bg-black/50"></div>
+
+        {/* Konten */}
+        <div className="relative max-w-4xl text-center">
+          <motion.h1
+            className="text-5xl font-bold leading-tight text-[#C8A75F]"
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 1 }}
+            transition={{ duration: 1 }}
           >
-            {[
-              "Tim Profesional & Berpengalaman",
-              "Desain yang Disesuaikan",
-              "Proses Transparan & Kolaboratif",
-              "Layanan Tepat Waktu & Terjangkau",
-            ].map((item, index) => (
-              <li key={index} className="flex items-center gap-3 text-lg">
-                <CheckCircle className="text-green-500 w-6 h-6" />
-                {item}
-              </li>
+            {slides[currentSlide].title}
+            {slides[currentSlide].subtitle && (
+              <span className="text-white">
+                {" "}
+                <br /> {slides[currentSlide].subtitle}
+              </span>
+            )}
+          </motion.h1>
+
+          {slides[currentSlide].services && (
+            <motion.div
+              className="mt-6 flex justify-center gap-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+            >
+              {slides[currentSlide].services.map((service, index) => (
+                <div
+                  key={index}
+                  className="px-6 py-3 border border-white rounded-lg text-lg font-semibold backdrop-blur-sm bg-white/20 hover:bg-white/30 transition"
+                >
+                  {service}
+                </div>
+              ))}
+            </motion.div>
+          )}
+
+          {slides[currentSlide].freeOffers && (
+            <>
+              <motion.div
+                className="mt-6 text-3xl font-bold text-white"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.7 }}
+              >
+                GRATIS
+              </motion.div>
+
+              <motion.ul
+                className="mt-3 text-lg text-white space-y-2"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+              >
+                {slides[currentSlide].freeOffers.map((offer, index) => (
+                  <li key={index}>{offer}</li>
+                ))}
+              </motion.ul>
+
+              <p className="text-xs text-gray-300 mt-2">
+                *Syarat dan ketentuan berlaku
+              </p>
+
+              <motion.button
+                className="mt-6 px-6 py-3 bg-white text-black rounded-full font-semibold shadow-lg hover:bg-gray-200"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1, duration: 0.7 }}
+              >
+                Konsultasi Sekarang ➝
+              </motion.button>
+            </>
+          )}
+
+          {/* Indikator Slide */}
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
+            {slides.map((_, index) => (
+              <div
+                key={index}
+                className={`w-3 h-3 rounded-full ${
+                  index === currentSlide ? "bg-white" : "bg-gray-400"
+                } transition-all`}
+              />
             ))}
-          </motion.ul>
-
-          <motion.div
-            className="mt-5 bg-yellow-7 00 text-white p-6 rounded-lg max-w-sm"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1, duration: 1 }}
-          >
-            <h3 className="text-xl font-bold text-black">
-              Siap untuk{" "}
-              <span className="text-yellow-300">Hasil yang Memuaskan?</span>
-            </h3>
-            <button className="mt-4 px-6 py-3 bg-white text-black font-semibold rounded-full shadow-md hover:bg-gray-200">
-              Konsultasi Sekarang →
-            </button>
-          </motion.div>
-        </div>
-
-        <motion.div
-          className="relative right-10"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 1.2, duration: 1 }}
-        >
-          <div className="relative w-[500px] h-[400px] overflow-hidden rounded-[50%] shadow-lg">
-            <img
-              src="/interior.jpeg"
-              alt="Interior"
-              className="w-full h-full object-cover"
-            />
           </div>
+        </div>
+      </section>
 
-          <motion.div
-            className="absolute top-6 left-6 bg-black text-white px-4 py-2 rounded-full shadow-lg text-center"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 1.5, duration: 0.8 }}
+     <section className="relative py-20 bg-[#2D2217] text-white">
+        {/* Background Overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-30"
+          style={{ backgroundImage: "url('/blueprint.jpg')" }}
+        />
+
+        {/* Konten */}
+        <div className="relative max-w-6xl mx-auto px-6">
+          <motion.h2
+            className="text-4xl font-bold text-center mb-12"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
           >
-            <h4 className="text-2xl font-bold">10+</h4>
-            <p className="text-sm">Tahun Pengalaman</p>
-          </motion.div>
-        </motion.div>
-      </section>    
+            Mengapa Memilih Kami?
+          </motion.h2>
+
+          {/* Grid Container */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                className="relative p-6 bg-transparent border border-white/50 rounded-lg hover:bg-white/10 transition duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.7 }}
+              >
+                {/* Icon dalam lingkaran */}
+                <div className="absolute -top-6 left-6 w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center shadow-lg">
+                  {benefit.icon}
+                </div>
+
+                <h3 className="mt-8 text-xl font-semibold">{benefit.title}</h3>
+                <p className="mt-2 text-gray-300">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>  
 <Service />
-<Portofolio/>
+
       <section className="relative h-[500px] flex items-center text-white">
         <div
           className="absolute inset-0 bg-cover bg-center brightness-50"
@@ -277,93 +305,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="flex flex-col md:flex-row items-center gap-10 px-6 md:px-16 py-16 bg-white">
-        <div className="relative w-full md:w-1/2">
-          <motion.img
-            src="/villa2.jpeg"
-            alt="Interior Design"
-            className="w-full rounded-tl-[50px] rounded-br-[50px] shadow-lg"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          />
-
-          <motion.img
-            src="/interior2.jpeg"
-            alt="Luxury Interior"
-            className="absolute bottom-[-50px] right-[-50px] w-1/2 rounded-full border-4 border-white shadow-md"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          />
-        </div>
-
-        <div className="w-full md:w-1/2 text-gray-900">
-          <motion.h2
-            className="text-4xl font-bold ml-10  mb-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Dikerjakan Oleh Tenaga <br />
-            <span className="text-gray-500">Profesional dan Berpengalaman</span>
-          </motion.h2>
-
-          <motion.p
-            className="text-lg text-gray-600 ml-10 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            Setiap proyek interior kami dikerjakan oleh tenaga profesional yang
-            berpengalaman, memastikan hasil optimal sesuai kebutuhan Anda.
-            Dengan keahlian tinggi, kami memberikan desain estetis dan
-            fungsional, menciptakan ruang yang nyaman.
-          </motion.p>
-
-          <motion.div
-            className="space-y-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <div className="flex items-center ml-10 gap-4">
-              <FaRegFileAlt className="text-3xl text-gray-800" />
-              <div>
-                <h3 className="font-bold text-lg">
-                  Tenaga Profesional & Berpengalaman
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  Semua pekerja merupakan tenaga ahli
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center ml-10 gap-4">
-              <FaDollarSign className="text-3xl text-gray-800" />
-              <div>
-                <h3 className="font-bold text-lg">
-                  Harga Terjangkau dan Transparan
-                </h3>
-                <p className="text-gray-500 text-sm">
-                  Harga bersaing dan tanpa biaya tersembunyi
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center ml-10 gap-4">
-              <FaHeadset className="text-3xl text-gray-800" />
-              <div>
-                <h3 className="font-bold text-lg">24/7 Customer Support</h3>
-                <p className="text-gray-500 text-sm">
-                  Kami siap membantu kapan saja
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
+      
       <Ulasan/>
 
       <section

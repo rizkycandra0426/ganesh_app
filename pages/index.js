@@ -1,6 +1,6 @@
 
-import LandingPage from "../pages/views/landingpage"; // Pastikan path benar
-import PortofolioPage from "./views/portofoliopage";
+import LandingPage from "./views/landingpage"
+
 export default function Home() {
   return <LandingPage/>
 }
