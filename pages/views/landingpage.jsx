@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar";
 import { motion, AnimatePresence } from "framer-motion";
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { CheckCircle, Users, Ruler, ClipboardList, Clock } from "lucide-react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -10,12 +10,10 @@ import {
   FaRegFileAlt,
   FaDollarSign,
   FaHeadset,
-  
   FaHandshake,
   FaClipboardList,
   FaCogs,
   FaPencilRuler,
-  
 } from "react-icons/fa";
 import Service from "@/components/service";
 import Portofolio from "@/components/portofolio";
@@ -68,7 +66,7 @@ const slides = [
       "✅ Desain 2D & 3D*",
     ],
     background: "/construction.jpg",
-  },
+  },
 ];
 
 const benefits = [
@@ -105,7 +103,7 @@ const benefits = [
     title: "Bergaransi",
     description:
       "Masa pemeliharaan bangunan dan interior kami berikan selama 2 bulan.",
-  },
+  },
 ];
 export default function LandingPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -114,12 +112,12 @@ export default function LandingPage() {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, []);
   return (
     <div className="bg-white font-sans">
-    <Navbar/>
+      <Navbar />
 
-    <section className="relative h-screen flex items-center justify-center text-white bg-cover bg-center">
+      <section className="relative h-screen flex items-center justify-center text-white bg-cover bg-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSlide}
@@ -140,7 +138,7 @@ export default function LandingPage() {
         {/* Konten */}
         <div className="relative max-w-4xl text-center">
           <motion.h1
-            className="text-5xl font-bold leading-tight text-[#C8A75F]"
+            className="text-5xl font-bold leading-tight text-red-500"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -198,14 +196,20 @@ export default function LandingPage() {
                 *Syarat dan ketentuan berlaku
               </p>
 
-              <motion.button
-                className="mt-6 px-6 py-3 bg-white text-black rounded-full font-semibold shadow-lg hover:bg-gray-200"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1, duration: 0.7 }}
+              <a
+                href="https://wa.me/628179981881?text=Halo%20Ganesh%20House%2C%20saya%20ingin%20konsultasi%20lebih%20lanjut"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Konsultasi Sekarang ➝
-              </motion.button>
+                <motion.button
+                  className="mt-6 px-6 py-3 bg-red-600 text-white rounded-full font-semibold shadow-lg hover:bg-white hover:text-red-500 transition-colors"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1, duration: 0.7 }}
+                >
+                  Konsultasi Sekarang ➝
+                </motion.button>
+              </a>
             </>
           )}
 
@@ -221,15 +225,48 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
-      </section>
 
-     <section className="relative py-20 bg-[#2D2217] text-white">
+        {/* Shape Divider dengan Gradient */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+          <svg
+            className="relative block w-[calc(100%+1.3px)] h-[80px]"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            viewBox="0 0 1000 120"
+          >
+            <defs>
+              <linearGradient
+                id="shapeGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stopColor="#fca5a5" /> {/* red-300 */}
+                <stop offset="50%" stopColor="#dc2626" /> {/* red-600 */}
+                <stop offset="100%" stopColor="#7f1d1d" /> {/* red-900 */}
+              </linearGradient>
+            </defs>
+            <path
+              d="M321.39 56.39c58.53 10.51 117.67 10.48 
+        176.17-.11 59.76-10.75 119.44-26.19 179.19-26.18 
+        60.06.01 120.04 15.74 180.09 24.92 63.7 9.78 
+        127.63 8.13 191.17-1.64V0H0v27.35c69.1 9.65 
+        138.53 18.4 207.8 27.01 38.3 4.53 76.6 
+        9.01 114.8 2.03z"
+              fill="url(#shapeGradient)"
+              transform="scale(1 -1) translate(0 -120)"
+            />
+          </svg>
+        </div>
+      </section>
+
+      <section className="relative py-20 bg-gradient-to-l from-red-900 via-red-600 to-red-300 text-white">
         {/* Background Overlay */}
-        <div
+        {/* <div
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{ backgroundImage: "url('/blueprint.jpg')" }}
-        />
-
+        /> */}
         {/* Konten */}
         <div className="relative max-w-6xl mx-auto px-6">
           <motion.h2
@@ -246,24 +283,45 @@ export default function LandingPage() {
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
-                className="relative p-6 bg-transparent border border-white/50 rounded-lg hover:bg-white/10 transition duration-300"
+                className="relative p-6 bg-red-700 border border-white/50 rounded-lg hover:bg-white/10 transition duration-300"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.7 }}
               >
                 {/* Icon dalam lingkaran */}
-                <div className="absolute -top-6 left-6 w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center shadow-lg">
+                <div className="absolute -top-6 left-6 w-12 h-12 rounded-full bg-red-500 flex items-center justify-center shadow-lg">
                   {benefit.icon}
                 </div>
 
-                <h3 className="mt-8 text-xl font-semibold">{benefit.title}</h3>
-                <p className="mt-2 text-gray-300">{benefit.description}</p>
+                <h3 className="mt-8 text-xl font-bold">{benefit.title}</h3>
+                <p className="mt-2 text-gray-50">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>  
-<Service />
+        {/* Shape pemisah di bagian bawah */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+          <svg
+            className="relative block w-[calc(100%+1.3px)] h-[80px]"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            viewBox="0 0 1000 120"
+          >
+            <path
+              d="M321.39 56.39c58.53 10.51 117.67 10.48 
+        176.17-.11 59.76-10.75 119.44-26.19 179.19-26.18 
+        60.06.01 120.04 15.74 180.09 24.92 63.7 9.78 
+        127.63 8.13 191.17-1.64V0H0v27.35c69.1 9.65 
+        138.53 18.4 207.8 27.01 38.3 4.53 76.6 
+        9.01 114.8 2.03z"
+              fill="#f9fafb" // Warna bisa disesuaikan
+              transform="scale(1 -1) translate(0 -120)" // Membalik shape ke bawah
+            />
+          </svg>
+        </div>
+      </section>
+
+      <Service />
 
       <section className="relative h-[500px] flex items-center text-white">
         <div
@@ -273,13 +331,13 @@ export default function LandingPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <motion.h2
-            className="text-4xl font-bold mb-4"
+            className="text-4xl font-bold mb-4 text-red-500"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             Pelanggan Puas <br />
-            <span className="text-gray-300">Direkomendasikan</span> Semua Orang
+            <span className="text-red-500">Direkomendasikan Semua Orang</span>
           </motion.h2>
 
           <motion.p
@@ -296,23 +354,42 @@ export default function LandingPage() {
           </motion.p>
 
           <motion.a
-            href="#"
-            className="inline-block px-6 py-3 bg-white text-gray-900 font-semibold rounded-full shadow-lg hover:bg-gray-200 transition"
+            href="https://wa.me/628179981881?text=Halo%20Ganesh%20House%2C%20saya%20ingin%20konsultasi%20lebih%20lanjut"
+            className="inline-block px-6 py-3 bg-red-600 text-white font-semibold rounded-full shadow-lg hover:bg-red-700 transition"
             whileHover={{ scale: 1.05 }}
           >
             Konsultasi Sekarang →
           </motion.a>
         </div>
+        {/* Shape pemisah di bagian bawah */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+          <svg
+            className="relative block w-[calc(100%+1.3px)] h-[80px]"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            viewBox="0 0 1000 120"
+          >
+            <path
+              d="M321.39 56.39c58.53 10.51 117.67 10.48 
+        176.17-.11 59.76-10.75 119.44-26.19 179.19-26.18 
+        60.06.01 120.04 15.74 180.09 24.92 63.7 9.78 
+        127.63 8.13 191.17-1.64V0H0v27.35c69.1 9.65 
+        138.53 18.4 207.8 27.01 38.3 4.53 76.6 
+        9.01 114.8 2.03z"
+              fill="#f9fafb" // Warna bisa disesuaikan
+              transform="scale(1 -1) translate(0 -120)" // Membalik shape ke bawah
+            />
+          </svg>
+        </div>
       </section>
 
-      
-      <Ulasan/>
+      <Ulasan />
 
       <section
         className="relative bg-cover bg-center text-white py-20"
         style={{ backgroundImage: "url(/villa.jpeg')" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#6D4C2F] via-[#6D4C2F]/90 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-l from-red-900 via-red-600 to-red-300"></div>
 
         <div className="relative max-w-6xl mx-auto px-6 md:px-16">
           <motion.h2
@@ -321,13 +398,14 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-[#FFD700]">Proses</span> Desain Interior{" "}
-            <span className="text-[#FFD700]">dari</span> Konsultasi hingga
-            Realisasi
+            <span className="text-gray-50 ">Proses Desain Interior</span>{" "}
+            <span className="text-gray-50">
+              dari Konsultasi hingga Realisasi
+            </span>
           </motion.h2>
 
           <motion.p
-            className="text-lg text-white/80 mb-10"
+            className="text-lg font-semibold text-gray-50 mb-10"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
@@ -342,13 +420,13 @@ export default function LandingPage() {
             {steps.map((step, index) => (
               <motion.div
                 key={index}
-                className="flex items-start gap-4 bg-[#5A3C24] p-6 rounded-lg shadow-lg"
+                className="flex items-start gap-4 bg-red-700 p-6 rounded-lg shadow-lg"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.8 }}
               >
-                <div className="w-14 h-14 bg-[#FFD700] flex items-center justify-center rounded-full">
+                <div className="w-14 h-14 bg-red-500 flex items-center justify-center rounded-full">
                   {step.icon}
                 </div>
                 <div>
@@ -361,7 +439,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
