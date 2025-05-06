@@ -1,28 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar"; // pastikan path Navbar benar
-
-const products = [
-  {
-    name: "Desain Rumah Minimalis",
-    image: "/produk1.jpg",
-    description:
-      "Desain rumah 1 lantai dengan konsep minimalis modern, cocok untuk keluarga muda.",
-  },
-  {
-    name: "Interior Scandinavian",
-    image: "/produk2.jpg",
-    description:
-      "Konsep interior dengan nuansa kayu terang, cocok untuk apartemen dan rumah kecil.",
-  },
-  {
-    name: "Jasa Renovasi Dapur",
-    image: "/produk3.jpg",
-    description: "Renovasi dapur lama menjadi lebih modern dan fungsional.",
-  },
-];
+import { getJsonPublicPath } from "@/helpers/json";
 
 export default function ProductPage() {
+  const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  useEffect(() => {
+    const jsonPublicPath = getJsonPublicPath("product");
+
+    const fetchData = async () => {
+      const res = await fetch(jsonPublicPath);
+      const jsonData = await res.json();
+      setProducts(jsonData["datas"] ?? []);
+    }
+  
+    fetchData();
+  }, []);
 
   return (
     <div className="relative">

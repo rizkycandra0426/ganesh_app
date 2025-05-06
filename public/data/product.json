@@ -1,0 +1,24 @@
+{
+    "datas": [
+        {
+            "id": "1",
+            "name": "Desain Rumah Minimalis",
+            "image": "/images/image-placeholder.png",
+            "description":
+              "Desain rumah 1 lantai dengan konsep minimalis modern, cocok untuk keluarga muda."
+          },
+          {
+            "id": "2",
+            "name": "Interior Scandinavian",
+            "image": "/images/image-placeholder.png",
+            "description":
+              "Konsep interior dengan nuansa kayu terang, cocok untuk apartemen dan rumah kecil."
+          },
+          {
+            "id": "3",
+            "name": "Jasa Renovasi Dapur",
+            "image": "/images/image-placeholder.png",
+            "description": "Renovasi dapur lama menjadi lebih modern dan fungsional."
+          }
+    ]
+}
