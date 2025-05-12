@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   FaTimes,
   FaMapMarkerAlt,
@@ -8,21 +7,49 @@ import {
 } from "react-icons/fa";
 import Head from "next/head";
 
-import portfolioItems from "../../data/portofolioitems";
-
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { filterData, getJsonPublicPath } from "@/helpers/json";
+import { useState, useEffect, useRef } from "react";
 
 export default function PortfolioPage() {
-  const categories = Object.keys(portfolioItems); // ← Ini harus di atas
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]); // ← Ini yang error tadi
+
+  const [datas, setDatas] = useState([]);
+  const [filteredDatas, setFilteredDatas] = useState(datas);
+  const [categories, setCategories] = useState([]); // ← Ini harus di atas
+  const [selectedCategory, setSelectedCategory] = useState(""); // ← Ini yang error tadi
   const [searchQuery, setSearchQuery] = useState("");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedItem, setSelectedItem] = useState(null);
-  const filteredItems = (portfolioItems[selectedCategory] || []).filter(
-    (item) =>
-      (item.title || "").toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+	const jsonPublicPath = getJsonPublicPath("porto");
+
+	const fetchData = async () => {
+		const res = await fetch(jsonPublicPath);
+		const jsonData = await res.json();
+		if(!jsonData['datas']) {
+			setDatas([]);
+		}
+		setDatas(jsonData["datas"] ?? []);
+
+		const categories = jsonData["categories"] ?? [];
+		setCategories(categories);
+		setSelectedCategory(categories.length > 0 ? categories[0] : "");
+	}
+
+	fetchData();
+  },[]);
+
+  useEffect(() => {
+	if(firstRender.current) {
+		firstRender.current = false;
+      	return;
+	}
+	const additionalFilter = (data) => data['category'] == selectedCategory;
+	setFilteredDatas(filterData(datas, searchQuery, additionalFilter));
+  }, [searchQuery, selectedCategory]);
 
   const openModal = (item) => {
     setSelectedItem(item);
@@ -68,7 +95,7 @@ export default function PortfolioPage() {
             </p>
           </div>
           <div className="flex justify-center space-x-6">
-            {Object.keys(portfolioItems).map((category) => (
+            {categories.map((category) => (
               <button
                 key={category}
                 className={`px-6 py-2 font-semibold rounded-lg ${
@@ -87,16 +114,16 @@ export default function PortfolioPage() {
             <input
               type="text"
               placeholder="Search projects by name or location..."
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full text-black p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
 
           {/* Portfolio Grid */}
-          {filteredItems.length > 0 ? (
+          {filteredDatas.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {filteredItems.map((item) => (
+              {filteredDatas.map((item) => (
                 <div
                   key={item.id}
                   className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
@@ -104,7 +131,7 @@ export default function PortfolioPage() {
                 >
                   <div className="h-48 overflow-hidden">
                     <img
-                      src={item.thumbnail}
+                      src={item.images.length > 0 ? item.images[0] : "/images/image-placeholder.png" }
                       alt={item.name}
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                     />
@@ -231,7 +258,7 @@ export default function PortfolioPage() {
                             <div>
                               <p className="text-sm text-gray-500">Location</p>
                               <p className="text-gray-800">
-                                {selectedItem.location}
+                                {selectedItem.location} 
                               </p>
                             </div>
                           </div>
@@ -240,7 +267,7 @@ export default function PortfolioPage() {
                             <div>
                               <p className="text-sm text-gray-500">Land Area</p>
                               <p className="text-gray-800">
-                                {selectedItem.landArea}
+                                {selectedItem.land_area.toLocaleString('id-ID')} m²
                               </p>
                             </div>
                           </div>
@@ -251,7 +278,7 @@ export default function PortfolioPage() {
                                 Building Area
                               </p>
                               <p className="text-gray-800">
-                                {selectedItem.buildingArea}
+                                {selectedItem.building_area.toLocaleString('id-ID')} m²
                               </p>
                             </div>
                           </div>
@@ -260,7 +287,7 @@ export default function PortfolioPage() {
                             <div>
                               <p className="text-sm text-gray-500">Duration</p>
                               <p className="text-gray-800">
-                                {selectedItem.duration}
+                                {selectedItem.duration.toLocaleString('id-ID')} months
                               </p>
                             </div>
                           </div>
