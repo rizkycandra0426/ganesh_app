@@ -29,6 +29,9 @@ export default function PortfolioPage() {
 	const fetchData = async () => {
 		const res = await fetch(jsonPublicPath);
 		const jsonData = await res.json();
+		if(!jsonData['datas']) {
+			setDatas([]);
+		}
 		setDatas(jsonData["datas"] ?? []);
 
 		const categories = jsonData["categories"] ?? [];
@@ -264,7 +267,7 @@ export default function PortfolioPage() {
                             <div>
                               <p className="text-sm text-gray-500">Land Area</p>
                               <p className="text-gray-800">
-                                {selectedItem.land_area} m²
+                                {selectedItem.land_area.toLocaleString('id-ID')} m²
                               </p>
                             </div>
                           </div>
@@ -275,7 +278,7 @@ export default function PortfolioPage() {
                                 Building Area
                               </p>
                               <p className="text-gray-800">
-                                {selectedItem.building_area} m²
+                                {selectedItem.building_area.toLocaleString('id-ID')} m²
                               </p>
                             </div>
                           </div>
@@ -284,7 +287,7 @@ export default function PortfolioPage() {
                             <div>
                               <p className="text-sm text-gray-500">Duration</p>
                               <p className="text-gray-800">
-                                {selectedItem.duration} months
+                                {selectedItem.duration.toLocaleString('id-ID')} months
                               </p>
                             </div>
                           </div>

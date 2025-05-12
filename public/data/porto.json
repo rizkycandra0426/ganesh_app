@@ -1,22 +1,44 @@
 {
-    "categories": ["Desain Arsitek", "Rumah Kaget"],
-    "datas": [
-        {
-            "id": "1",
-            "category": "Desain Arsitek",
-            "name": "Modern Minimalist House",
-            "location": "Jakarta, Indonesia",
-            "land_area": 250,
-            "building_area": 180,
-            "duration": 8,
-            "description": "A sleek modern home with clean lines and open spaces, designed for urban living.",
-            "features": [
-                "Open floor plan concept",
-                "Floor-to-ceiling windows",
-                "Minimalist interior design",
-                "Smart home technology"
-            ],
-            "images": ["/images/image-placeholder.png"]
-        }
-    ]
+  "categories": [
+    "Desain Arsitek",
+    "Rumah Kaget"
+  ],
+  "datas": [
+    {
+      "id": "1",
+      "category": "Desain Arsitek",
+      "name": "Modern Minimalist Houses",
+      "location": "Jakarta, Indonesia",
+      "land_area": 250,
+      "building_area": 180,
+      "duration": 8,
+      "description": "A sleek modern home with clean lines and open spaces, designed for urban living.",
+      "features": [
+        "Open floor plan concept",
+        "Floor-to-ceiling windows",
+        "Minimalist interior design",
+        "Smart home technology"
+      ],
+      "images": [
+        "/images/image-placeholder.png"
+      ]
+    },
+    {
+      "id": "478uxbt8maktyr10",
+      "name": "test",
+      "location": "Canggu",
+      "category": "Desain Arsitek",
+      "land_area": 1000,
+      "building_area": 3000,
+      "duration": 30,
+      "description": "test",
+      "features": [
+        "Nyaman",
+        "Manja di Mata"
+      ],
+      "images": [
+        "/matt"
+      ]
+    }
+  ]
 }

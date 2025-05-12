@@ -10,7 +10,7 @@ const mimeToExt = {
     'image/webp': 'webp',
 };
 const decodeBase64 = (encoded) => {
-    if (!encoded || !encoded.startsWith('data:')) {
+    if (!encoded) {
         return false;
     }
     return Buffer.from(encoded, 'base64');
@@ -24,7 +24,7 @@ const extractMimeAndFile = (encoded) => {
     return { 
         "mimeType": matches[1], 
         "data": matches[2], 
-        "extension": mimeToExt[mimeType] || 'bin' 
+        "extension": mimeToExt[matches[1]] || 'bin' 
     };
 }
 
@@ -39,11 +39,11 @@ const saveFileToPublic = (dir, extension, buff) => {
 export const saveJsonAsset = (encoded, dir) => {
     const { mimeType = "", data = "", extension = "bin" } = extractMimeAndFile(encoded);
     if(!mimeType || !data) {
-        return;
+        return "";
     }
     const buff = decodeBase64(data);
     if(!buff) {
-        return;
+        return "";
     }
     return saveFileToPublic(dir, extension, buff);
 }
