@@ -50,7 +50,7 @@ export default function PortofolioAdmin() {
     }
   };
 
-  const categories = ["arsitek", "sipil", "interior"];
+  const categories = ["arsitek", "Bangunan", "interior"];
 
   // Filter portofolio berdasarkan tab aktif
   const filteredPortfolios = portofolios.filter(

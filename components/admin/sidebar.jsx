@@ -12,8 +12,11 @@ export default function Sidebar() {
         <Link href="/admin/portofolio" className="hover:underline">
           Portofolio
         </Link>
-        <Link href="/admin/project" className="hover:underline">
-          Project
+        <Link href="/admin/product" className="hover:underline">
+          Product
+        </Link>
+        <Link href="/admin/profile" className="hover:underline">
+          Profile
         </Link>
       </nav>
     </aside>
