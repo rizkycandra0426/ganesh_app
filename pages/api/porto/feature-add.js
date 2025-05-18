@@ -1,4 +1,5 @@
 import { formatDataToResponse, getJsonFile, getJsonPath, saveToJson } from "@/helpers/api";
+import { authorize } from "@/helpers/auth";
 import { validateJson } from "@/helpers/validate";
 
 const addFeatureRules = {
@@ -8,6 +9,9 @@ const addFeatureRules = {
 export default function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ "message": 'Method Not Allowed' });
+    }
+    if(!authorize(req)) {
+        return res.status(401).json({ "message": 'Unauthorize' });
     }
     const { id } = req.query;
     if(!id) {
