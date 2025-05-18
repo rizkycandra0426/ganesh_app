@@ -212,18 +212,6 @@ export default function LandingPage() {
               </a>
             </>
           )}
-
-          {/* Indikator Slide */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
-            {slides.map((_, index) => (
-              <div
-                key={index}
-                className={`w-3 h-3 rounded-full ${
-                  index === currentSlide ? "bg-white" : "bg-gray-400"
-                } transition-all`}
-              />
-            ))}
-          </div>
         </div>
 
         {/* Shape Divider dengan Gradient */}

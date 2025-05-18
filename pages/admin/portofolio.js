@@ -1,35 +1,62 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "@/components/admin/sidebar";
 
 export default function PortofolioAdmin() {
   const [portofolios, setPortofolios] = useState([]);
   const [selected, setSelected] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [activeTab, setActiveTab] = useState("arsitek"); // State untuk tab aktif
+  const [activeTab, setActiveTab] = useState("Desain Arsitek"); // State untuk tab aktif
   const [form, setForm] = useState({
     name: "",
     location: "",
-    category: "arsitek",
+    category: "",
     land_area: "",
     building_area: "",
     duration: "",
     description: "",
+    features: [], // opsional
+    images: [], // opsional
   });
 
-  const handleSave = () => {
-    if (selected) {
-      setPortofolios((prev) =>
-        prev.map((item) =>
-          item.id === selected.id ? { ...form, id: selected.id } : item
-        )
-      );
-    } else {
-      const newItem = { ...form, id: Date.now() };
-      setPortofolios((prev) => [...prev, newItem]);
+  const handleSave = async () => {
+    try {
+      const isEdit = selected !== null;
+      const endpoint = isEdit
+        ? `/api/porto/update?id=${selected.id}`
+        : "/api/porto/create";
+      const method = isEdit ? "PUT" : "POST";
+
+      const response = await fetch(endpoint, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          land_area: Number(form.land_area),
+          building_area: Number(form.building_area),
+          duration: Number(form.duration),
+          features: form.features ?? [],
+          images: form.images ?? [],
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        alert("Gagal menyimpan: " + result.message);
+        return;
+      }
+
+      alert(isEdit ? "Data berhasil diperbarui" : "Data berhasil disimpan");
+      resetForm();
+      setShowModal(false);
+      setSelected(null);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error saat menyimpan:", error);
+      alert("Terjadi kesalahan saat menyimpan.");
     }
-    setSelected(null);
-    setShowModal(false);
-    resetForm();
   };
 
   const resetForm = () => {
@@ -44,13 +71,27 @@ export default function PortofolioAdmin() {
     });
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/data/porto.json");
+        const data = await res.json();
+        setPortofolios(data.datas);
+      } catch (error) {
+        console.error("Failed to fetch portofolios:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleDelete = (id) => {
     if (confirm("Yakin ingin hapus?")) {
       setPortofolios((prev) => prev.filter((item) => item.id !== id));
     }
   };
 
-  const categories = ["arsitek", "Bangunan", "interior"];
+  const categories = ["Desain Arsitek", "Bangunan", "interior"];
 
   // Filter portofolio berdasarkan tab aktif
   const filteredPortfolios = portofolios.filter(
@@ -61,7 +102,7 @@ export default function PortofolioAdmin() {
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <div className="p-6 flex-1">
+      <div className="p-6 flex-1 bg-gray-800">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Manajemen Portofolio</h1>
           <button
@@ -103,7 +144,7 @@ export default function PortofolioAdmin() {
               >
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="font-semibold">{item.name}</h3>
+                    <h3 className="font-semibold text-black">{item.name}</h3>
                     <p className="text-sm text-gray-600">{item.location}</p>
                     <p className="text-sm text-gray-500 mt-1">
                       Luas Bangunan: {item.building_area} | Durasi:{" "}
@@ -169,7 +210,7 @@ export default function PortofolioAdmin() {
               >
                 ✕
               </button>
-              <h2 className="text-xl font-bold mb-4">
+              <h2 className="text-xl font-bold mb-4 text-black">
                 {selected ? "Edit Portofolio" : "Tambah Portofolio"}
               </h2>
               <form
@@ -193,7 +234,7 @@ export default function PortofolioAdmin() {
                       </label>
                       <input
                         type="text"
-                        className="w-full border p-2 rounded"
+                        className="w-full border p-2 rounded text-black"
                         value={form[field] || ""}
                         onChange={(e) =>
                           setForm({ ...form, [field]: e.target.value })
@@ -208,7 +249,7 @@ export default function PortofolioAdmin() {
                     Kategori
                   </label>
                   <select
-                    className="w-full border p-2 rounded"
+                    className="w-full border p-2 rounded text-gray-500"
                     value={form.category}
                     onChange={(e) =>
                       setForm({ ...form, category: e.target.value })
@@ -223,11 +264,48 @@ export default function PortofolioAdmin() {
                 </div>
 
                 <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Fitur
+                  </label>
+                  <input
+                    className="w-full border p-2 rounded text-black"
+                    type="text"
+                    placeholder="Tambah fitur (pisahkan dengan koma)"
+                    value={form.features?.join(", ") || ""}
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        features: e.target.value
+                          .split(",")
+                          .map((f) => f.trim()),
+                      })
+                    }
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Gambar
+                  </label>
+                  <input
+                    className="w-full border p-2 rounded text-black"
+                    placeholder="Tambah images (pisahkan dengan koma)"
+                    value={form.images?.join(", ") || ""}
+                    onChange={(e) =>
+                      setForm({
+                        ...form,
+                        images: e.target.value.split(",").map((f) => f.trim()),
+                      })
+                    }
+                  />
+                </div>
+
+                <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Deskripsi
                   </label>
                   <textarea
-                    className="w-full border p-2 rounded"
+                    className="w-full border p-2 rounded text-black"
                     rows="3"
                     value={form.description || ""}
                     onChange={(e) =>
@@ -243,7 +321,7 @@ export default function PortofolioAdmin() {
                       setShowModal(false);
                       resetForm();
                     }}
-                    className="px-4 py-2 border rounded"
+                    className="px-4 py-2 border rounded text-black"
                   >
                     Batal
                   </button>
