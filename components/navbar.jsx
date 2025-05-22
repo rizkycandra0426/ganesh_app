@@ -8,11 +8,11 @@ export default function Navbar() {
         <img
           src="/logo1.png"
           alt="Brand Logo"
-          className="w-24 cursor-pointer"
+          className="w-auto h-[80px] cursor-pointer"
         />
       </Link>
 
-      <ul className="flex space-x-6 text-gray-50  ">
+      <ul className="flex space-x-6 text-gray-50 items-center ">
         <li>
           <Link href="/" className="hover:text-red-700 transition">
             Home

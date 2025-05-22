@@ -7,7 +7,7 @@
     {
       "id": "1",
       "category": "Desain Arsitek",
-      "name": "Modern Minimalist Houses",
+      "name": "Modern Minimalist Housesaaas",
       "location": "Jakarta, Indonesia",
       "land_area": 250,
       "building_area": 180,
@@ -21,6 +21,57 @@
       ],
       "images": [
         "/images/image-placeholder.png"
+      ]
+    },
+    {
+      "id": "478uxbt8maktyr10",
+      "name": "test",
+      "location": "Canggu",
+      "category": "Desain Arsitek",
+      "land_area": 1000,
+      "building_area": 3000,
+      "duration": 30,
+      "description": "test",
+      "features": [
+        "Nyaman",
+        "Manja di Mata"
+      ],
+      "images": [
+        "/matt"
+      ]
+    },
+    {
+      "id": "kgcxmchdmatcekko",
+      "name": "sasa",
+      "location": "saassa",
+      "category": "Desain Arsitek",
+      "land_area": 111,
+      "building_area": 1112,
+      "duration": 12,
+      "description": "sasasaas",
+      "features": [
+        "assasa"
+      ],
+      "images": [
+        "asasassa"
+      ]
+    },
+    {
+      "id": "qkiwpl4vmatcsv6z",
+      "name": "Singam",
+      "location": "Gianyar",
+      "category": "Bangunan",
+      "land_area": 900,
+      "building_area": 700,
+      "duration": 18,
+      "description": "ruma minimalis ",
+      "features": [
+        "anyaman",
+        "besi",
+        "kayu"
+      ],
+      "images": [
+        "dahdajaan"
       ]
     }
   ]
