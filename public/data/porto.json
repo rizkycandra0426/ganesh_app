@@ -22,23 +22,6 @@
       "images": [
         "/images/image-placeholder.png"
       ]
-    },
-    {
-      "id": "478uxbt8maktyr10",
-      "name": "test",
-      "location": "Canggu",
-      "category": "Desain Arsitek",
-      "land_area": 1000,
-      "building_area": 3000,
-      "duration": 30,
-      "description": "test",
-      "features": [
-        "Nyaman",
-        "Manja di Mata"
-      ],
-      "images": [
-        "/matt"
-      ]
     }
   ]
 }
