@@ -1,5 +1,4 @@
-import { getJsonPath, saveToJson, formatDataToResponse } from "@/helpers/api";
-import { validateJson } from "@/helpers/validate";
+import { createFunc } from "@/helpers/api-func";
 import { generateRandomString } from "@/helpers/str";
 
 const createRules = {
@@ -15,9 +14,6 @@ const createRules = {
 };
 
 export default function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ "message": 'Method Not Allowed' });
-    }
     const { 
         name = "", 
         location = "", 
@@ -43,13 +39,5 @@ export default function handler(req, res) {
         images
     }
 
-    const fails = validateJson(data, createRules);
-    if(fails) {
-        return res.status(400).json({...formatDataToResponse(fails, "Invalid validation")});
-    }
-
-    const jsonPath = getJsonPath("porto");
-    saveToJson(data, jsonPath);
-
-    return res.status(201).json({ ...formatDataToResponse(data, "Created") });
+    return createFunc(req, res, data, "porto", createRules);
 }
